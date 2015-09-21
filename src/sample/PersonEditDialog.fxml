@@ -57,7 +57,7 @@
                               <Insets left="5.0" />
                            </padding>
                         </Label>
-                        <TextField fx:id="firstNameField" styleClass="background" text="Сергей" GridPane.columnIndex="1" />
+                        <TextField fx:id="firstNameField" styleClass="background" GridPane.columnIndex="1" />
                         <TextField fx:id="lastNameField" styleClass="background" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <TextField fx:id="streetField" styleClass="background" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <TextField fx:id="cityField" styleClass="background" GridPane.columnIndex="1" GridPane.rowIndex="3" />
