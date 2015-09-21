@@ -8,7 +8,7 @@
     -fx-font-size: 10pt;
     -fx-font-family: "Segoe UI Semibold";
     -fx-text-fill: white;
-    -fx-opacity: 0.6;
+    -fx-opacity: 1;
 }
 
 .label-bright
@@ -83,11 +83,16 @@
 .menu-bar
 {
     -fx-background-color: derive(#1d1d1d, 20%);
+     -fx-font-size: 10pt;
+     -fx-font-family: "Segoe UI Light";
+     -fx-text-fill: white;
+     -fx-alignment: center-left;
+     -fx-opacity: 1;
 }
 
 .context-menu
 {
-    -fx-background-color: derive(#1d1d1d, 50%);
+    -fx-background-color: derive(#1d1d1d, 20%);
 }
 
 .menu-bar .label
@@ -95,7 +100,7 @@
     -fx-font-size: 10pt;
     -fx-font-family: "Segoe UI Light";
     -fx-text-fill: white;
-    -fx-opacity: 0.9;
+    -fx-opacity: 1;
 }
 
 .menu .left-container
@@ -107,6 +112,9 @@
 {
     -fx-font-size: 10pt;
     -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: white;
+    -fx-border-color: white;
+    -fx-opacity: 1;
 }
 
 .button
