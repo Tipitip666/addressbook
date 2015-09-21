@@ -24,7 +24,10 @@
                      <accelerator>
                         <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator></MenuItem>
-                  <MenuItem mnemonicParsing="false" onAction="#handleSaveAs" text="Сохранить как..." />
+                  <MenuItem mnemonicParsing="false" onAction="#handleSaveAs" text="Сохранить как...">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
+                     </accelerator></MenuItem>
               <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Выход">
                      <accelerator>
                         <KeyCodeCombination alt="DOWN" code="X" control="UP" meta="UP" shift="UP" shortcut="UP" />
@@ -41,7 +44,10 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Помощь">
             <items>
-              <MenuItem mnemonicParsing="false" text="О программе" />
+              <MenuItem mnemonicParsing="false" onAction="#handleAbout" text="О программе">
+                     <accelerator>
+                        <KeyCodeCombination alt="DOWN" code="O" control="UP" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
             </items>
           </Menu>
         </menus>

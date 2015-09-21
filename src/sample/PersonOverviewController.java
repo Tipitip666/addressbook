@@ -83,7 +83,7 @@ public class PersonOverviewController
         else
         {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Нет выделения");
+            alert.setTitle("Ошибка");
             alert.setHeaderText("Ничто не выделено");
             alert.setContentText("Пожалуйста, сначала выделите запись");
             alert.showAndWait();
@@ -117,9 +117,9 @@ public class PersonOverviewController
         else
         {
             Alert alert3 = new Alert(Alert.AlertType.ERROR);
-            alert3.setTitle("Нет выделения");
+            alert3.setTitle("Ошибка");
             alert3.setHeaderText("Ничто не выделено");
-            alert3.setContentText("Пожалуйста, сначала выделите запись.");
+            alert3.setContentText("Пожалуйста, сначала выделите запись");
             alert3.showAndWait();
         }
     }

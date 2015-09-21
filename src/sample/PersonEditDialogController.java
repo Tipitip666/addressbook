@@ -137,7 +137,7 @@ public class PersonEditDialogController
         else
         {
             Alert alert2 = new Alert(Alert.AlertType.ERROR);
-            alert2.setTitle("Неверно заполненные поля");
+            alert2.setTitle("Ошибка");
             alert2.setHeaderText("Пожалуйста, заполните поля верно");
             alert2.setContentText(errorMessage);
             alert2.showAndWait();

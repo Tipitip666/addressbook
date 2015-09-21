@@ -73,10 +73,10 @@ public class RootLayoutController
     @FXML
     private void handleAbout()
     {
-        Alert alert6 = new Alert(Alert.AlertType.ERROR);
-        alert6.setTitle("Адресная книга");
-        alert6.setHeaderText("О программе");
-        alert6.setContentText("Автор: Вадим Мясников");
+        Alert alert6 = new Alert(Alert.AlertType.INFORMATION);
+        alert6.setTitle("О программе");
+        alert6.setHeaderText("Адресная книга v0.01");
+        alert6.setContentText("Автор: Deathmachine");
         alert6.showAndWait();
     }
 
