@@ -46,6 +46,7 @@ public class Main extends Application
     {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("Адресная книга");
+
         //add some simple data.
         personData.add(new Person("Иван", "Иванов"));
         personData.add(new Person("Пётр", "Петров"));
@@ -218,6 +219,7 @@ public class Main extends Application
         else
         {
             prefs.remove("filePath");
+
             // Update the stage title.
             primaryStage.setTitle("Адресная книга");
         }
@@ -267,7 +269,7 @@ public class Main extends Application
         }
         catch (Exception e)
         {
-            // catches any exception
+            // Catches any exception
             Alert alert4 = new Alert(Alert.AlertType.ERROR);
             alert4.setTitle("Ошибка");
             alert4.setHeaderText("Не удалось загрузить файл:\n" + file.getPath());
@@ -299,7 +301,7 @@ public class Main extends Application
         }
         catch (Exception e)
         {
-            // catches any exception
+            // Catches any exception
             Alert alert5 = new Alert(Alert.AlertType.ERROR);
             alert5.setTitle("Ошибка");
             alert5.setHeaderText("Не удалось сохранить файл:\n" + file.getPath());

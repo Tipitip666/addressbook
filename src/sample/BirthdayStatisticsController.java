@@ -14,7 +14,7 @@ import java.util.Locale;
 
 /**
  * The controller for the birthday statistics view.
-  */
+ */
 public class BirthdayStatisticsController
 {
     @FXML
