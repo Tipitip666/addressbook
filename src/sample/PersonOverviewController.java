@@ -27,27 +27,44 @@ public class PersonOverviewController
     @FXML
     private Label birthdayLabel;
 
+    // Reference to the main application.
     private Main main;
 
+    /**
+     *  The constructor.
+     *  It's called before the initialize() method.
+     */
     public PersonOverviewController()
-    {
-    }
+    {}
 
+    /**
+     *   Initializes the controller class. This method is automatically called
+     *   after the fxml file has been loaded.
+     */
     @FXML
     public void initialize()
     {
+        // Initializes the person table with the two columns.
         firstNameColumn.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
         lastNameColumn.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
 
+        // Clear person details.
         showPersonDetails(null);
 
+        // Listen for selection changes and show the person details when changed.
         personTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showPersonDetails(newValue));
     }
 
+    /**
+     *   Fills all text fields to show details about the person.
+     *   If the specified person is null, all text fields are cleared.
+     *   @param person the person or null
+     */
     private void showPersonDetails (Person person)
     {
         if (person != null)
         {
+            // Fill the labels with info from the person object.
             firstNameLabel.setText(person.getFirstName());
             lastNameLabel.setText(person.getLastName());
             streetLabel.setText(person.getStreet());
@@ -57,7 +74,8 @@ public class PersonOverviewController
         }
         else
         {
-            firstNameLabel.setText((""));
+            // Person is null, remove all the text.
+            firstNameLabel.setText("");
             lastNameLabel.setText("");
             streetLabel.setText("");
             postalCOdeLabel.setText("");
@@ -66,12 +84,20 @@ public class PersonOverviewController
         }
     }
 
+    /**
+     *   Is called by the main application to give a reference back to itself.
+     *   @param main
+     */
     public void setMain (Main main)
     {
         this.main = main;
+        // Add observable list data to the table.
         personTable.setItems(main.getPersonData());
     }
 
+    /**
+     * Called when the user clicks on the delete button.
+     */
     @FXML
     private void handleDeletePerson()
     {
@@ -82,6 +108,7 @@ public class PersonOverviewController
         }
         else
         {
+            // Nothing selected.
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Ошибка");
             alert.setHeaderText("Ничто не выделено");
@@ -90,6 +117,10 @@ public class PersonOverviewController
         }
     }
 
+    /**
+     * Called when the user clicks the new button. Opens a dialog to edit
+     * details for a new person.
+     */
     @FXML
     private void handleNewPerson()
     {
@@ -102,6 +133,10 @@ public class PersonOverviewController
         }
     }
 
+    /**
+     * Called when the user clicks the edit button. Opens a dialog to edit
+     * details for the selected person.
+     */
     @FXML
     private void handleEditPerdon()
     {
@@ -116,6 +151,7 @@ public class PersonOverviewController
         }
         else
         {
+            // Nothing selected.
             Alert alert3 = new Alert(Alert.AlertType.ERROR);
             alert3.setTitle("Ошибка");
             alert3.setHeaderText("Ничто не выделено");

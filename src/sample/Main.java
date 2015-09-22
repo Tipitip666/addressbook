@@ -24,11 +24,18 @@ import java.util.prefs.Preferences;
 
 public class Main extends Application
 {
+    /**
+     *   The data as an observable list of Persons.
+     */
     private ObservableList<Person> personData = FXCollections.observableArrayList();
 
     private Stage primaryStage;
     private BorderPane rootLayout;
 
+    /**
+     *   Returns the data as an observable list of Persons.
+     *   @return
+     */
     public ObservableList<Person> getPersonData()
     {
         return personData;
@@ -39,6 +46,7 @@ public class Main extends Application
     {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("Адресная книга");
+        //add some simple data.
         personData.add(new Person("Иван", "Иванов"));
         personData.add(new Person("Пётр", "Петров"));
         personData.add(new Person("Андрей", "Андреев"));
@@ -48,21 +56,32 @@ public class Main extends Application
         personData.add(new Person("Алексей", "Алексеев"));
         personData.add(new Person("Валерий", "Валерьев"));
         personData.add(new Person("Владимир", "Владимиров"));
+
+        // Set the application icon.
         this.primaryStage.getIcons().add(new Image("file: resource/images/333.png"));
 
         initRootLayout();
         showPersonOverview();
     }
+
+    /**
+     * Initializes the root layout and tries to load the last opened
+     * person file.
+     */
         public void initRootLayout()
     {
         try
         {
+            // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("rootLayout.fxml"));
             rootLayout = (BorderPane) loader.load();
 
+            // Show the scene containing the root layout.
             Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);
+
+            // Give the controller access to the main application.
             RootLayoutController controller = loader.getController();
             controller.setMain(this);
             primaryStage.show();
@@ -72,6 +91,8 @@ public class Main extends Application
             e.printStackTrace();
         }
 
+
+        // Try to load last opened person file.
         File file = getPersonFilePath();
         if (file != null)
         {
@@ -79,16 +100,22 @@ public class Main extends Application
         }
     }
 
+    /**
+     *   Show the person overview inside the root layout.
+     */
     public void showPersonOverview()
     {
         try
         {
+        // Load person overview.
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(Main.class.getResource("sample.fxml"));
         AnchorPane personOverview = (AnchorPane) loader.load();
 
+        // Set the person overview into the center of root layout.
         rootLayout.setCenter(personOverview);
 
+        // Give the controller access to the main application.
         PersonOverviewController controller = loader.getController();
         controller.setMain(this);
         }
@@ -98,14 +125,23 @@ public class Main extends Application
         }
     }
 
+    /**
+     * Opens a dialog to edit details for the specified person. If the user
+     * clicks OK, the changes are saved into the provided person object and true
+     * is returned.
+     * @param person the person object to be edited
+     * @return true if the user clicked OK, false otherwise.
+     */
     public boolean showPersonEditDialog(Person person)
     {
         try
         {
+            // Load the fxml file and create a new stage for the popup dialog.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("PersonEditDialog.fxml"));
             AnchorPane page = (AnchorPane)loader.load();
 
+            // Create the dialog Stage.
             Stage dialogStage = new Stage();
             dialogStage.setTitle("Редактировать");
             dialogStage.initModality(Modality.WINDOW_MODAL);
@@ -113,10 +149,12 @@ public class Main extends Application
             Scene scene = new Scene(page);
             dialogStage.setScene(scene);
 
+            // Set the person into the controller.
             PersonEditDialogController controller = loader.getController();
             controller.setDialogStage(dialogStage);
             controller.setPerson(person);
 
+            // Show the dialog and wait until the user closes it.
             dialogStage.showAndWait();
 
             return controller.isOkClicked();
@@ -128,6 +166,10 @@ public class Main extends Application
         }
     }
 
+    /**
+     *   Returns the main stage.
+     *   @return
+     */
     public Stage getPrimaryStage()
     {
         return primaryStage;
@@ -138,6 +180,12 @@ public class Main extends Application
         launch(args);
     }
 
+    /**
+     * Returns the person file preference, i.e. the file that was last opened.
+     * The preference is read from the OS specific registry. If no such
+     * preference can be found, null is returned.
+     * @return
+     */
     public File getPersonFilePath()
     {
         Preferences prefs = Preferences.userNodeForPackage(Main.class);
@@ -152,21 +200,33 @@ public class Main extends Application
         }
     }
 
+    /**
+     * Sets the file path of the currently loaded file. The path is persisted in
+     * the OS specific registry.
+     * @param file the file or null to remove the path
+     */
     public void setPersonFilePath(File file)
     {
         Preferences prefs = Preferences.userNodeForPackage(Main.class);
         if (file != null)
         {
             prefs.put("filePath", file.getPath());
+
+            // Update the stage title.
             primaryStage.setTitle("Адресная книга - " + file.getName());
         }
         else
         {
             prefs.remove("filePath");
+            // Update the stage title.
             primaryStage.setTitle("Адресная книга");
         }
     }
 
+    /**
+     * Helper class to wrap a list of persons. This is used for saving the
+     * list of persons to XML.
+     */
     @XmlRootElement(name = "persons")
     public class PersonListWrapper
     {
@@ -184,6 +244,11 @@ public class Main extends Application
         }
     }
 
+    /**
+     * Loads person data from the specified file. The current person data will
+     * be replaced.
+     * @param file
+     */
     public void loadPersonDataFromFile(File file)
     {
         try
@@ -191,15 +256,18 @@ public class Main extends Application
             JAXBContext context = JAXBContext.newInstance(PersonListWrapper.class);
             Unmarshaller um = context.createUnmarshaller();
 
+            // Reading XML from the file and unmarshalling.
             PersonListWrapper wrapper = (PersonListWrapper)um.unmarshal(file);
 
             personData.clear();
             personData.addAll(wrapper.getPersons());
 
+            // Save the file path to the registry.
             setPersonFilePath(file);
         }
         catch (Exception e)
         {
+            // catches any exception
             Alert alert4 = new Alert(Alert.AlertType.ERROR);
             alert4.setTitle("Ошибка");
             alert4.setHeaderText("Не удалось загрузить файл:\n" + file.getPath());
@@ -207,6 +275,10 @@ public class Main extends Application
         }
     }
 
+    /**
+     * Saves the current person data to the specified file.
+     * @param file
+     */
     public void  savePersonDataToFile(File file)
     {
         try
@@ -215,15 +287,19 @@ public class Main extends Application
             Marshaller m = context.createMarshaller();
             m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
+            // Wrapping our person data.
             PersonListWrapper wrapper = new PersonListWrapper();
             wrapper.setPersons(personData);
 
+            // Marshalling and saving XML to the file.
             m.marshal(wrapper, file);
 
+            // Save the file path to the registry.
             setPersonFilePath(file);
         }
         catch (Exception e)
         {
+            // catches any exception
             Alert alert5 = new Alert(Alert.AlertType.ERROR);
             alert5.setTitle("Ошибка");
             alert5.setHeaderText("Не удалось сохранить файл:\n" + file.getPath());
@@ -231,10 +307,14 @@ public class Main extends Application
         }
     }
 
+    /**
+     * Opens a dialog to show birthday statistics.
+     */
     public void showBirthdayStatistics()
     {
         try
         {
+            // Load the fxml file and create a new stage for the popup.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("BirthdayStatistics.fxml"));
             AnchorPane page = (AnchorPane) loader.load();
@@ -245,6 +325,7 @@ public class Main extends Application
             Scene scene = new Scene(page);
             dialogStage.setScene(scene);
 
+            // Set the persons into the controller.
             BirthdayStatisticsController controller = loader.getController();
             controller.setPersonData(personData);
             dialogStage.show();

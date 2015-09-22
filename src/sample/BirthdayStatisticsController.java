@@ -12,6 +12,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
+/**
+ * The controller for the birthday statistics view.
+  */
 public class BirthdayStatisticsController
 {
     @FXML
@@ -22,17 +25,31 @@ public class BirthdayStatisticsController
 
     private ObservableList <String> monthsNames = FXCollections.observableArrayList();
 
+    /**
+     * Initializes the controller class. This method is automatically called
+     * after the fxml file has been loaded.
+     */
     @FXML
     private void initialize()
     {
+        // Get an array with the Russian month names.
         Locale ruLocale = new Locale("ru", "RU");
         String[] months = DateFormatSymbols.getInstance(ruLocale).getMonths();
+
+        // Convert it to a list and add it to our ObservableList of months.
         monthsNames.addAll(Arrays.asList(months));
+
+        // Assign the month names as categories for the horizontal axis.
         xAxis.setCategories(monthsNames);
     }
 
+    /**
+     * Sets the persons to show the statistics for.
+     * @param persons
+     */
     public void setPersonData(List<Person> persons)
     {
+        // Count the number of people having their birthday in a specific month.
         int[] monthCounter = new int[12];
         for (Person p : persons)
         {
@@ -41,6 +58,7 @@ public class BirthdayStatisticsController
         }
         XYChart.Series<String, Integer> series = new XYChart.Series<>();
 
+        // Create a XYChart.Data object for each month. Add it to the series.
         for (int i = 0; i < monthCounter.length; i++)
         {
             series.getData().add(new XYChart.Data<>(monthsNames.get(i), monthCounter[i]));

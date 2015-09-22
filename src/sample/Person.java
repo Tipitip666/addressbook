@@ -5,6 +5,9 @@ import javafx.beans.property.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDate;
 
+/**
+ *   Model class for a Person.
+ */
 public class Person
 {
     public StringProperty firstNameProperty()
@@ -19,20 +22,29 @@ public class Person
     private final StringProperty city;
     private final ObjectProperty<LocalDate> birthday;
 
+    /**
+     *   Default constructor.
+     */
     public Person()
     {
         this(null, null);
     }
 
+    /**
+     *   Constructor with some initial data.
+     *   @param firstName
+     *   @param lastName
+     */
     public Person (String firstName, String lastName)
     {
         this.firstName = new SimpleStringProperty(firstName);
         this.lastName = new SimpleStringProperty(lastName);
 
+        // Initial blank data.
         this.street = new SimpleStringProperty("");
         this.postalCode = new SimpleIntegerProperty();
         this.city = new SimpleStringProperty("");
-        this.birthday = new SimpleObjectProperty<LocalDate>(LocalDate.of(0, 0, 0));
+        this.birthday = new SimpleObjectProperty<LocalDate>(LocalDate.of(2000, 1, 1));
     }
 
     public String getFirstName()
