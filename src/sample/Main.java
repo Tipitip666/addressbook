@@ -59,7 +59,7 @@ public class Main extends Application
         personData.add(new Person("Владимир", "Владимиров"));
 
         // Set the application icon.
-        this.primaryStage.getIcons().add(new Image("file: resource/images/333.png"));
+        this.primaryStage.getIcons().add(new Image("file: resources/images/333.png"));
 
         initRootLayout();
         showPersonOverview();
@@ -76,7 +76,7 @@ public class Main extends Application
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("rootLayout.fxml"));
-            rootLayout = (BorderPane) loader.load();
+            rootLayout = loader.load();
 
             // Show the scene containing the root layout.
             Scene scene = new Scene(rootLayout);
@@ -111,7 +111,7 @@ public class Main extends Application
         // Load person overview.
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(Main.class.getResource("sample.fxml"));
-        AnchorPane personOverview = (AnchorPane) loader.load();
+        AnchorPane personOverview = loader.load();
 
         // Set the person overview into the center of root layout.
         rootLayout.setCenter(personOverview);
@@ -140,7 +140,7 @@ public class Main extends Application
             // Load the fxml file and create a new stage for the popup dialog.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("PersonEditDialog.fxml"));
-            AnchorPane page = (AnchorPane)loader.load();
+            AnchorPane page = loader.load();
 
             // Create the dialog Stage.
             Stage dialogStage = new Stage();
@@ -319,7 +319,7 @@ public class Main extends Application
             // Load the fxml file and create a new stage for the popup.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("BirthdayStatistics.fxml"));
-            AnchorPane page = (AnchorPane) loader.load();
+            AnchorPane page = loader.load();
             Stage dialogStage = new Stage();
             dialogStage.setTitle("Статистика дней рождения");
             dialogStage.initModality(Modality.WINDOW_MODAL);

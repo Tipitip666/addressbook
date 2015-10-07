@@ -110,7 +110,7 @@ public class RootLayoutController
     {
         Alert alert6 = new Alert(Alert.AlertType.INFORMATION);
         alert6.setTitle("О программе");
-        alert6.setHeaderText("Адресная книга v0.02");
+        alert6.setHeaderText("Адресная книга\nВерсия 0.02");
         alert6.setContentText("Автор: Deathmachine");
         alert6.showAndWait();
     }

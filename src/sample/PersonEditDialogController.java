@@ -156,7 +156,7 @@ public class PersonEditDialogController
         {
             if (!DateUtil.validDate(birthdayField.getText()))
             {
-                errorMessage += "Неверный лень рождения. Используйте формат дд.мм.гггг!\n";
+                errorMessage += "Неверный день рождения. Используйте формат дд.мм.гггг!\n";
             }
         }
 
