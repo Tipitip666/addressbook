@@ -88,7 +88,7 @@
 
 .menu-bar
 {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: #1d1d1d;
     -fx-font-size: 10pt;
     -fx-font-family: "Segoe UI Light";
     -fx-text-fill: white;
